@@ -38,10 +38,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Stylelint for CSS
-        uses: actions/stylelint@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          files: "**/*.css"
+          node-version: "16"
+
+      - name: Install Stylelint
+        run: |
+          npm install stylelint stylelint-config-standard
+
+      - name: Run Stylelint
+        run: npx stylelint "**/*.css"
 
   build:
     name: Build Python Application
